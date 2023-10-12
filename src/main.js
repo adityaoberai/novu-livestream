@@ -1,7 +1,7 @@
 import { OpenAIApi, Configuration } from 'openai';
 import { getStaticFile, throwIfMissing } from './utils.js';
 
-export default async ({ req, res }) => {
+export default async ({ req, res, log, error }) => {
   throwIfMissing(process.env, ['OPENAI_API_KEY']);
 
   if (req.method === 'GET') {
@@ -29,8 +29,10 @@ export default async ({ req, res }) => {
       messages: [{ role: 'user', content: req.body.prompt }],
     });
     const completion = response.data.choices[0].message?.content;
+    log(completion);
     return res.json({ ok: true, completion }, 200);
   } catch (err) {
+    error(err);
     return res.json({ ok: false, error: 'Failed to query model.' }, 500);
   }
 };
