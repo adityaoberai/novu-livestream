@@ -53,7 +53,7 @@ export default async ({ req, res, log, error }) => {
 
     return res.json({ ok: true, completion }, 200);
   } catch (err) {
-    error(err);
+    error(err.message);
     return res.json({ ok: false, error: 'Failed to query model.' }, 500);
   }
 };
