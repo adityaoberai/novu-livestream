@@ -42,10 +42,10 @@ export default async ({ req, res, log, error }) => {
     var db = new Databases(client);
 
     db.createDocument(
-      databaseId='65280ff09154f456ef18',
-      collectionId='65281003049729eb3b0d',
-      documentId=ID.unique(),
-      data= {
+      "65280ff09154f456ef18",
+      "65281003049729eb3b0d",
+      ID.unique(),
+      {
         prompt: req.body.prompt,
         completion: completion
       }
